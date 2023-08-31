@@ -1,6 +1,5 @@
-import { PayloadAction, createSlice, current } from "@reduxjs/toolkit";
+import {  createSlice } from "@reduxjs/toolkit";
 import { UserStates } from "../../helpers/models";
-import { user } from "../../helpers/constants";
 
 const userReducer = createSlice({
   name: "user",

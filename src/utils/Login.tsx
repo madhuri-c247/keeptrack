@@ -9,13 +9,14 @@ import { AppDispatch, RootState } from '../services/Store';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { login } from '../services/reducers/userReducer';
 
-function Login() {
+
+const Login:React.FC = ()=> {
+  const navigate = useNavigate()
   const [userData, setUser] = useState({
     email: '',
     password: ''
   })
 
-  const navigate = useNavigate();
   const useAppDispatch: () => AppDispatch = useDispatch;
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
   const matchedUser = useAppSelector(state=>state.user.matchedUser);
@@ -29,7 +30,7 @@ function Login() {
     event.preventDefault();
     dispatch(login(userData));
     if(matchedUser.length>0){
-      navigate('/')
+     navigate('/')
       console.log(matchedUser,'found');
     }
     else{
@@ -57,7 +58,7 @@ function Login() {
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" name='email' value={userData.email} onChange={handleChange} />
+                <Form.Control className='focus:outline-none' type="email" placeholder="Enter email" name='email' value={userData.email} onChange={handleChange} />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
                 </Form.Text>
@@ -66,7 +67,7 @@ function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" name='password' value={userData.password} onChange={handleChange} />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button className='focus:border-indigo-500' variant="primary" type="submit">
                 Submit
               </Button>
               <Form.Text>New User?</Form.Text><NavLink to={'/signup'}>Register</NavLink>
